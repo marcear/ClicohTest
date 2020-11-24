@@ -13,6 +13,7 @@ import Home from "../Pages/Home/Home";
 import Dolar from "../Pages/Dolar/Dolar";
 import Weather from "../Pages/Weather/Weather";
 import Login from "../Pages/Login/Login";
+import UserAdmin from "../Pages/UserAdmin/UserAdmin";
 
 const Main = () => {
   return (
@@ -23,6 +24,7 @@ const Main = () => {
           <Route path="/" component={Home} exact />
           <Route path="/dolar" component={Dolar} />
           <Route path="/weather" component={Weather} />
+          <Route path="/admin" component={UserAdmin} />
           <Route path="/login" component={Login} />
         </Switch>
       </Body>

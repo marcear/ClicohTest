@@ -21,14 +21,20 @@ export const contextSlice = createSlice({
       state.user.password = payload.password;
       state.user.logged = true;
       state.user.role = "admin";
+      localStorage.setItem("user", JSON.stringify(state.user));
     },
     logout: (state) => {
       state.user = initialState.user;
+      const storateUser = localStorage.getItem("user");
+      if (storateUser) localStorage.removeItem("user");
+    },
+    setUser: (state, { payload }) => {
+      state.user = payload.user;
     },
   },
 });
 
-export const { loading, login, logout } = contextSlice.actions;
+export const { loading, login, logout, setUser } = contextSlice.actions;
 
 export const contextSelector = (state) => state.context;
 

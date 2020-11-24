@@ -31,7 +31,7 @@ const Navbar = () => {
       </Menu.Item>
       {user.role === "admin" ? (
         <Menu.Item key="admin">
-          <Link to="/admin">Admin</Link>
+          <Link to="/admin">Users admin</Link>
         </Menu.Item>
       ) : null}
 
