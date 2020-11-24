@@ -17,14 +17,18 @@ export const contextSlice = createSlice({
       state.loading = true;
     },
     login: (state, { payload }) => {
-      debugger;
-      state.user.name = payload;
-      state.user.password = payload;
+      state.user.name = payload.name;
+      state.user.password = payload.password;
+      state.user.logged = true;
+      state.user.role = "admin";
+    },
+    logout: (state) => {
+      state.user = initialState.user;
     },
   },
 });
 
-export const { login } = contextSlice.actions;
+export const { loading, login, logout } = contextSlice.actions;
 
 export const contextSelector = (state) => state.context;
 

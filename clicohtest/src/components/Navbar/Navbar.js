@@ -1,21 +1,20 @@
 import React from "react";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { contextSelector } from "../../reducers/contextSlice";
+import { contextSelector, logout } from "../../reducers/contextSlice";
 //antd
-import { Menu, Avatar, Dropdown } from "antd";
+import { Menu, Dropdown } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 //react router
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { user } = useSelector(contextSelector);
-  debugger;
   const dispatch = useDispatch();
 
   const menu = (
     <Menu>
-      <Menu.Item>Cerrar sesion</Menu.Item>
+      <Menu.Item onClick={() => dispatch(logout())}>Cerrar sesion</Menu.Item>
     </Menu>
   );
 
@@ -30,9 +29,12 @@ const Navbar = () => {
       <Menu.Item key="weather">
         <Link to="/weather">Weather</Link>
       </Menu.Item>
-      <Menu.Item key="admin">
-        <Link to="/admin">Admin</Link>
-      </Menu.Item>
+      {user.role === "admin" ? (
+        <Menu.Item key="admin">
+          <Link to="/admin">Admin</Link>
+        </Menu.Item>
+      ) : null}
+
       <div style={{ float: "right" }}>
         {user.logged ? (
           <Dropdown.Button
@@ -40,7 +42,7 @@ const Navbar = () => {
             placement="bottomRight"
             icon={<UserOutlined />}
           >
-            Admin
+            {user.name}
           </Dropdown.Button>
         ) : (
           <Link to="/login">Ingresar</Link>

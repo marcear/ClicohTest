@@ -1,5 +1,7 @@
 //react
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { contextSelector, login } from "../../../reducers/contextSlice";
 //antd
 import { Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
@@ -7,8 +9,10 @@ import { Link } from "react-router-dom";
 import "./Login.scss";
 
 const Login = (props) => {
+  const dispatch = useDispatch();
+
   const formIntialValues = {
-    user: "",
+    name: "",
     password: "",
   };
   const [form] = Form.useForm();
@@ -30,8 +34,10 @@ const Login = (props) => {
     },
   };
 
-  const onSubmit = () => {
-    props.onSubmit(user);
+  const onLogin = () => {
+    //fake login
+    dispatch(login(user));
+    props.history.push("/");
   };
 
   const handleUserChange = (propertyName) => (event) => {
@@ -41,43 +47,21 @@ const Login = (props) => {
     });
   };
 
-  const handleUserRoleChange = (role) => {
-    setUser({
-      ...user,
-      role: role,
-    });
-  };
-
-  //   useEffect(() => {
-  //     form.setFieldsValue({
-  //       email: user.email,
-  //       password: user.password,
-  //       role: user.role,
-  //       name: user.name,
-  //       lastname: user.lastname,
-  //     });
-  //   }, [user]);
-
   return (
     <Form
       size="middle"
       form={form}
       {...layout}
-      onFinish={onSubmit}
+      onFinish={onLogin}
       className="login-form"
       initialValues={formIntialValues}
     >
       <Form.Item
         label="Usuario"
-        name="user"
-        rules={[
-          {
-            message: "No es un email válido",
-          },
-          { required: true, message: "Ingresar usuario" },
-        ]}
+        name="name"
+        rules={[{ required: true, message: "Ingresar usuario" }]}
       >
-        <Input onChange={handleUserChange("email")} placeholder="Usuario" />
+        <Input onChange={handleUserChange("name")} placeholder="Usuario" />
       </Form.Item>
 
       <Form.Item
