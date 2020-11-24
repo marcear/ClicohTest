@@ -7,26 +7,27 @@ import Header from "../Header/Header";
 import Body from "../Body/Body";
 import Footer from "../Footer/Footer";
 //react-router
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 //component pages
+import Home from "../Pages/Home/Home";
 import Dolar from "../Pages/Dolar/Dolar";
 import Weather from "../Pages/Weather/Weather";
+import Login from "../Pages/Login/Login";
 
 const Main = () => {
   return (
-    <Router>
-      <Layout>
-        <Header />
-        <Body>
-          <Switch>
-            <Route path="/" render={() => <div>Home</div>} exact />
-            <Route path="/dolar" component={Dolar} />
-            <Route path="/weather" component={Weather} />
-          </Switch>
-        </Body>
-        <Footer />
-      </Layout>
-    </Router>
+    <Layout>
+      <Header />
+      <Body>
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/dolar" component={Dolar} />
+          <Route path="/weather" component={Weather} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </Body>
+      <Footer />
+    </Layout>
   );
 };
 

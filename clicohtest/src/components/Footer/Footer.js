@@ -8,7 +8,9 @@ import "./Footer.scss";
 const { Footer: AntFooter } = Layout;
 
 const Footer = () => {
-  return <AntFooter className="footer-main">footer</AntFooter>;
+  return (
+    <AntFooter className="footer-main">Test Clicoh - Marcelo Arias</AntFooter>
+  );
 };
 
 export default Footer;

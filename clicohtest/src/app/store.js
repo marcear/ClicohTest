@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import weatherSlice from "../reducers/weatherSlice";
+import dolarSlice from "../reducers/dolarSlice";
+import contextSlice from "../reducers/contextSlice";
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    weather: weatherSlice,
+    dolar: dolarSlice,
+    context: contextSlice,
   },
 });
