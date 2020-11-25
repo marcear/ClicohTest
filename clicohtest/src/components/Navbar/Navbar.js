@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import {
-  contextSelector,
-  logout,
-  setShowLoginButton,
-} from "../../reducers/contextSlice";
+import { contextSelector, logout } from "../../reducers/contextSlice";
 //antd
 import { Menu, Dropdown, Button } from "antd";
 import {
@@ -54,18 +50,18 @@ const Navbar = () => {
           <HomeOutlined className="navbar-mobile-icon" />
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="/dolar">
+      <Menu.Item key="/dolarMobile">
         <NavLink to="/dolar">
           <DollarCircleOutlined className="navbar-mobile-icon" />
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="/weather">
+      <Menu.Item key="/weatherMobile">
         <NavLink to="/weather">
           <AntCloudOutlined className="navbar-mobile-icon" />
         </NavLink>
       </Menu.Item>
       {user.logged && user.role === "admin" ? (
-        <Menu.Item key="/admin">
+        <Menu.Item key="/adminMobile">
           <NavLink to="/admin">
             <UsergroupDeleteOutlined className="navbar-mobile-icon" />
           </NavLink>

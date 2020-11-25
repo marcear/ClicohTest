@@ -5,14 +5,18 @@ import Navbar from "../Navbar/Navbar";
 import { Layout } from "antd";
 //css
 import "./Header.scss";
+//components
+import StickyHeader from "../StickyHeader/StickyHeader";
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
   return (
-    <AntHeader className="header-main">
-      <Navbar />
-    </AntHeader>
+    <StickyHeader>
+      <AntHeader className="header-main">
+        <Navbar />
+      </AntHeader>
+    </StickyHeader>
   );
 };
 
