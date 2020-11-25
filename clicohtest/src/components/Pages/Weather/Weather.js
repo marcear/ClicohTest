@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchWeather, weatherSelector } from "../../../reducers/weatherSlice";
 import FormItem from "antd/lib/form/FormItem";
 //antd
-import { Row, Col, Statistic, Spin, Select, Form, Input } from "antd";
+import { Row, Col, Statistic, Spin, Select, Form, Input, Divider } from "antd";
 //css
 import "./Weather.scss";
 
@@ -39,6 +39,7 @@ const Weather = () => {
 
   return (
     <>
+      <Divider orientation="left">Clima de las distintas ciudades</Divider>
       <Row gutter={16}>
         <Col>
           <FormItem label="Sistema metrico">

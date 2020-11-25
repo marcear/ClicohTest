@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDolar, dolarSelector } from "../../../reducers/dolarSlice";
-import { Tabs, Row, Col, Statistic, Spin } from "antd";
+import { Tabs, Row, Col, Statistic, Spin, Divider } from "antd";
 
 const Dolar = () => {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const Dolar = () => {
 
   return (
     <>
-      <h3>Cotizacion por tipo de dolar</h3>
+      <Divider orientation="left">Cotización por tipo de dolar</Divider>
       <DolarTabs />
     </>
   );

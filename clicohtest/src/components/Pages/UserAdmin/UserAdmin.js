@@ -8,7 +8,7 @@ import {
   deleteUser,
 } from "../../../reducers/userSlice";
 //antd
-import { Row, Col, Table, Tag, Space, Spin, Popconfirm } from "antd";
+import { Row, Col, Table, Tag, Space, Spin, Popconfirm, Divider } from "antd";
 
 const UserAdmin = () => {
   const dispatch = useDispatch();
@@ -77,7 +77,12 @@ const UserAdmin = () => {
       </div>
     );
 
-  return <Table columns={columns} dataSource={users} pagination={false} />;
+  return (
+    <>
+      <Divider orientation="left">Administración de usuarios(fake)</Divider>
+      <Table columns={columns} dataSource={users} pagination={false} />
+    </>
+  );
 };
 
 export default UserAdmin;

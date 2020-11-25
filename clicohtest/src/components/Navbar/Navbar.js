@@ -1,21 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { contextSelector, logout } from "../../reducers/contextSlice";
+import {
+  contextSelector,
+  logout,
+  setShowLoginButton,
+} from "../../reducers/contextSlice";
 //antd
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 //react router
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
+//scss
+import "./Navbar.scss";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const { user } = useSelector(contextSelector);
+  const [showLoginButton, setShowLoginButton] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const menu = (
+  const handleShowLogin = () => {
+    setShowLoginButton(false);
+    history.push("/login");
+  };
+
+  const handleSingOff = () => {
+    setShowLoginButton(true);
+    dispatch(logout());
+  };
+
+  const userMenu = (
     <Menu>
-      <Menu.Item onClick={() => dispatch(logout())}>Cerrar sesion</Menu.Item>
+      <Menu.Item onClick={handleSingOff}>Cerrar sesion</Menu.Item>
     </Menu>
   );
 
@@ -37,16 +54,21 @@ const Navbar = (props) => {
       ) : null}
 
       <div style={{ float: "right" }}>
-        {user.logged ? (
-          <Dropdown.Button
-            overlay={menu}
-            placement="bottomRight"
-            icon={<UserOutlined />}
-          >
-            {user.name}
-          </Dropdown.Button>
-        ) : (
-          <Link to="/login">Ingresar</Link>
+        {user.logged && (
+          <div className="navbar-usermenu">
+            <Dropdown.Button
+              overlay={userMenu}
+              placement="bottomRight"
+              icon={<UserOutlined />}
+            >
+              {user.name}
+            </Dropdown.Button>
+          </div>
+        )}
+        {!user.logged && showLoginButton && (
+          <Button type="link" onClick={handleShowLogin}>
+            Ingresar
+          </Button>
         )}
       </div>
     </Menu>

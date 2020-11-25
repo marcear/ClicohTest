@@ -1,12 +1,17 @@
 //react
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { contextSelector, login } from "../../../reducers/contextSlice";
+import {
+  contextSelector,
+  login,
+  setShowLoginButton,
+} from "../../../reducers/contextSlice";
 //antd
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Col, Row } from "antd";
 import { useHistory, Redirect } from "react-router-dom";
 //scss
 import "./Login.scss";
+import FormItem from "antd/lib/form/FormItem";
 
 const Login = (props) => {
   const userContext = useSelector(contextSelector).user;
@@ -21,11 +26,18 @@ const Login = (props) => {
   const [user, setUser] = useState(formIntialValues);
 
   const layout = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 20 },
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
   };
+
   const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: {
+      span: 24,
+    },
   };
 
   const onLogin = () => {
@@ -44,42 +56,43 @@ const Login = (props) => {
   if (userContext.logged) return <Redirect to="/admin" />;
 
   return (
-    <Form
-      size="middle"
-      form={form}
-      {...layout}
-      onFinish={onLogin}
-      className="login-form"
-      initialValues={formIntialValues}
-    >
-      <Form.Item
-        label="Usuario"
-        name="name"
-        rules={[{ required: true, message: "Ingresar usuario" }]}
-      >
-        <Input onChange={handleUserChange("name")} placeholder="Usuario" />
-      </Form.Item>
+    <Row justify="center">
+      <div className="login-container">
+        <Form
+          {...layout}
+          size="middle"
+          form={form}
+          onFinish={onLogin}
+          className="login-form"
+          initialValues={formIntialValues}
+        >
+          <Form.Item
+            label="Usuario"
+            name="name"
+            rules={[{ required: true, message: "Ingresar usuario" }]}
+          >
+            <Input onChange={handleUserChange("name")} placeholder="Usuario" />
+          </Form.Item>
 
-      <Form.Item
-        label="Contraseña"
-        name="password"
-        rules={[{ required: true, message: "Ingresar contraseña" }]}
-      >
-        <Input.Password
-          disabled={user && user.id != null}
-          onChange={handleUserChange("password")}
-          placeholder="Contraseña"
-        />
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <div className="login-button">
-          <Button type="primary" block htmlType="submit">
-            Ingresar
-          </Button>
-        </div>
-      </Form.Item>
-    </Form>
+          <Form.Item
+            label="Contraseña"
+            name="password"
+            rules={[{ required: true, message: "Ingresar contraseña" }]}
+          >
+            <Input.Password
+              disabled={user && user.id != null}
+              onChange={handleUserChange("password")}
+              placeholder="Contraseña"
+            />
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button type="primary" block htmlType="submit">
+              Ingresar
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </Row>
   );
 };
 

@@ -35,7 +35,13 @@ export const contextSlice = createSlice({
   },
 });
 
-export const { loading, login, logout, setUser } = contextSlice.actions;
+export const {
+  loading,
+  login,
+  logout,
+  setUser,
+  setShowLoginButton,
+} = contextSlice.actions;
 
 export const contextSelector = (state) => state.context;
 
