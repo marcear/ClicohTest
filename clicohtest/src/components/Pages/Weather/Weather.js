@@ -55,7 +55,7 @@ const Weather = () => {
           </FormItem>
         </Col>
         <Col>
-          <FormItem label="City">
+          <FormItem label="Pais/Ciudad">
             <Search
               placeholder="buscar por pais/ciudad"
               onChange={(e) => setCountryQuery(e.target.value)}

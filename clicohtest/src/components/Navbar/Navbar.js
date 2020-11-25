@@ -27,11 +27,11 @@ const Navbar = () => {
         <Link to="/dolar">Dolar</Link>
       </Menu.Item>
       <Menu.Item key="weather">
-        <Link to="/weather">Weather</Link>
+        <Link to="/weather">Clima</Link>
       </Menu.Item>
       {user.role === "admin" ? (
         <Menu.Item key="admin">
-          <Link to="/admin">Users admin</Link>
+          <Link to="/admin">Admin usuarios</Link>
         </Menu.Item>
       ) : null}
 

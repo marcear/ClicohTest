@@ -1,2 +1,7 @@
 //import ant desing main css
 @import "antd/dist/antd.css";
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

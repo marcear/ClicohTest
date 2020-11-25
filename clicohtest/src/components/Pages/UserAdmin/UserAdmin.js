@@ -1,18 +1,18 @@
 //react
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchUsers,
   usersSelector,
-  usersSlice,
+  deleteUser,
 } from "../../../reducers/userSlice";
 //antd
-import { Row, Col, Table, Tag, Space } from "antd";
+import { Row, Col, Table, Tag, Space, Spin, Popconfirm } from "antd";
 
-const Weather = () => {
+const UserAdmin = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector(usersSelector);
+  const { users, loading } = useSelector(usersSelector);
 
   const columns = [
     {
@@ -25,6 +25,16 @@ const Weather = () => {
       title: "Genero",
       dataIndex: "gender",
       key: "gender",
+      render: (gender) => {
+        switch (gender) {
+          case "male":
+            return "Masculino";
+          case "female":
+            return "Femenino";
+          default:
+            return "N/A";
+        }
+      },
     },
     {
       title: "Color de ojos",
@@ -43,33 +53,16 @@ const Weather = () => {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a>Delete</a>
+          <Popconfirm
+            cancelText="NO"
+            okText="SI"
+            title="Esta seguro que desea borrarlo?"
+            onConfirm={() => dispatch(deleteUser(record))}
+          >
+            <a>Borrar</a>
+          </Popconfirm>
         </Space>
       ),
-    },
-  ];
-
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
     },
   ];
 
@@ -77,7 +70,14 @@ const Weather = () => {
     dispatch(fetchUsers());
   }, []);
 
+  if (loading)
+    return (
+      <div className="loading">
+        <Spin tip="Cargando usuarios" />
+      </div>
+    );
+
   return <Table columns={columns} dataSource={users} pagination={false} />;
 };
 
-export default Weather;
+export default UserAdmin;

@@ -18,6 +18,7 @@ function App() {
       dispatch(setUser({ user: JSON.parse(storageUser) }));
     }
   }, []);
+
   return (
     <>
       <Router>

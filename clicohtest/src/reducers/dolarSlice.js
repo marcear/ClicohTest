@@ -16,11 +16,7 @@ export const fetchDolar = createAsyncThunk("dolar/fetchDolar", async () => {
 export const dolarSlice = createSlice({
   name: "dolar",
   initialState,
-  reducers: {
-    loading: (state) => {
-      state.loading = true;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [fetchDolar.pending]: (state, action) => {
       state.loading = true;

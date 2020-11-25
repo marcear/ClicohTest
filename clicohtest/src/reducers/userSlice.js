@@ -8,15 +8,19 @@ const initialState = {
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   const response = await getPeople();
-  return response.data.results;
+  const dataWithIndex = response.data.results.map((result, index) => {
+    return { ...result, index: index };
+  });
+  return dataWithIndex;
 });
 
 export const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    loading: (state) => {
-      state.loading = true;
+    deleteUser: (state, { payload }) => {
+      debugger;
+      state.users = state.users.filter((user) => user.index !== payload.index);
     },
   },
   extraReducers: {
@@ -36,7 +40,7 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { loading, login } = usersSlice.actions;
+export const { loading, login, deleteUser } = usersSlice.actions;
 
 export const usersSelector = (state) => state.users;
 

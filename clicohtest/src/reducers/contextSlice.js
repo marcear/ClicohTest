@@ -7,6 +7,7 @@ const initialState = {
     role: "",
     logged: false,
   },
+  loading: false,
 };
 
 export const contextSlice = createSlice({

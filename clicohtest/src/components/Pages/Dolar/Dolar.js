@@ -3,11 +3,11 @@ import React, { useEffect } from "react";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDolar, dolarSelector } from "../../../reducers/dolarSlice";
-import { Tabs, Row, Col, Statistic } from "antd";
+import { Tabs, Row, Col, Statistic, Spin } from "antd";
 
 const Dolar = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector(dolarSelector);
+  const { data, loading } = useSelector(dolarSelector);
   const { TabPane } = Tabs;
 
   useEffect(() => {
@@ -46,6 +46,13 @@ const Dolar = () => {
       ))}
     </Tabs>
   );
+
+  if (loading)
+    return (
+      <div className="loading">
+        <Spin tip="Cargando cotizaciones" />
+      </div>
+    );
 
   return (
     <>
