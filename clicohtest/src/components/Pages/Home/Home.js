@@ -1,9 +1,20 @@
 //react
 import React, { useEffect } from "react";
+import { Row } from "antd";
 
 const Home = () => {
   return (
     <div>
+      <h3>
+        <Row>
+          Para acceder a una administracion de usuarios falsa, ingresar con:
+        </Row>
+        <Row>usuario: admin@example.com</Row>
+        <Row>contraseña: admin</Row>
+        <Row>
+          (de todos modos se loguea con cualquier usuario que se ingrese)
+        </Row>
+      </h3>
       <p>
         Why do we use it? It is a long established fact that a reader will be
         distracted by the readable content of a page when looking at its layout.
