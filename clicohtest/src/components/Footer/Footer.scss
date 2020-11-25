@@ -2,3 +2,14 @@
   display: flex;
   align-self: center;
 }
+
+.icons-list {
+  padding-left: 10px;
+  font-size: 16px;
+  span {
+    padding-left: 10px;
+  }
+  a {
+    color: inherit;
+  }
+}
