@@ -21,7 +21,10 @@ export const contextSlice = createSlice({
       state.user.name = payload.name;
       state.user.password = payload.password;
       state.user.logged = true;
-      state.user.role = "admin";
+      state.user.role =
+        payload.name === "admin@example.com" && payload.password === "admin"
+          ? "admin"
+          : "client";
       localStorage.setItem("user", JSON.stringify(state.user));
     },
     logout: (state) => {

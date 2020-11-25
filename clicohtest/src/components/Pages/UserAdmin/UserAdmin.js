@@ -8,11 +8,14 @@ import {
   deleteUser,
 } from "../../../reducers/userSlice";
 //antd
-import { Row, Col, Table, Tag, Space, Spin, Popconfirm, Divider } from "antd";
+import { Table, Tag, Space, Spin, Popconfirm, Divider } from "antd";
+import { contextSelector } from "../../../reducers/contextSlice";
+import { Redirect } from "react-router-dom";
 
 const UserAdmin = () => {
   const dispatch = useDispatch();
   const { users, loading } = useSelector(usersSelector);
+  const { user } = useSelector(contextSelector);
 
   const columns = [
     {
@@ -69,6 +72,8 @@ const UserAdmin = () => {
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
+
+  if (!user.logged) return <Redirect to="/" />;
 
   if (loading)
     return (

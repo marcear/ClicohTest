@@ -10,7 +10,7 @@ import {
 import { Menu, Dropdown, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 //react router
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 //scss
 import "./Navbar.scss";
 
@@ -26,6 +26,7 @@ const Navbar = () => {
   };
 
   const handleSingOff = () => {
+    history.push("/");
     setShowLoginButton(true);
     dispatch(logout());
   };
@@ -39,17 +40,19 @@ const Navbar = () => {
   return (
     <Menu mode="horizontal" defaultSelectedKeys={[history.location.pathname]}>
       <Menu.Item key="/">
-        <Link to="/">Home</Link>
+        <NavLink to="/" exact>
+          Home
+        </NavLink>
       </Menu.Item>
       <Menu.Item key="/dolar">
-        <Link to="/dolar">Dolar</Link>
+        <NavLink to="/dolar">Dolar</NavLink>
       </Menu.Item>
       <Menu.Item key="/weather">
-        <Link to="/weather">Clima</Link>
+        <NavLink to="/weather">Clima</NavLink>
       </Menu.Item>
       {user.logged && user.role === "admin" ? (
         <Menu.Item key="/admin">
-          <Link to="/admin">Admin usuarios</Link>
+          <NavLink to="/admin">Admin usuarios</NavLink>
         </Menu.Item>
       ) : null}
 

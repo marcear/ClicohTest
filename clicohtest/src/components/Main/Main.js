@@ -22,14 +22,25 @@ import { contextSelector } from "../../reducers/contextSlice";
 const Main = () => {
   const { user } = useSelector(contextSelector);
 
-  const PrivateRoute = ({ component: Component, authed, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) =>
-        authed ? <Component {...props} /> : <Redirect to="/login" />
-      }
-    />
-  );
+  const PrivateRoute = ({ children, authed, ...rest }) => {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          authed ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
 
   return (
     <Layout>
