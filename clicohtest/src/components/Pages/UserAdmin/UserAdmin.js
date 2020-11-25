@@ -56,7 +56,7 @@ const UserAdmin = () => {
           <Popconfirm
             cancelText="NO"
             okText="SI"
-            title="Esta seguro que desea borrarlo?"
+            title={`Esta seguro que desea borrar el usuario ${record.name}?`}
             onConfirm={() => dispatch(deleteUser(record))}
           >
             <a>Borrar</a>

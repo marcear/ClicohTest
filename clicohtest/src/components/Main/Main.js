@@ -26,7 +26,7 @@ const Main = () => {
     <Route
       {...rest}
       render={(props) =>
-        authed ? <Component {...props} /> : <Redirect to="/" />
+        authed ? <Component {...props} /> : <Redirect to="/login" />
       }
     />
   );
@@ -37,14 +37,16 @@ const Main = () => {
       <Body>
         <Switch>
           <Route path="/" component={Home} exact />
+          <Route path="/login" component={Login} />
           <Route path="/dolar" component={Dolar} />
           <Route path="/weather" component={Weather} />
           <PrivateRoute
+            exact
             path="/admin"
             component={UserAdmin}
             authed={user.logged && user.role === "admin"}
           />
-          <Route path="/login" component={Login} />
+          <Route path="*" component={Home} />
         </Switch>
       </Body>
       <Footer />

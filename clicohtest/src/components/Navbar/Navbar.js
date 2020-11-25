@@ -6,11 +6,12 @@ import { contextSelector, logout } from "../../reducers/contextSlice";
 import { Menu, Dropdown } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 //react router
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const { user } = useSelector(contextSelector);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const menu = (
     <Menu>
@@ -19,18 +20,18 @@ const Navbar = () => {
   );
 
   return (
-    <Menu mode="horizontal">
-      <Menu.Item key="home">
+    <Menu mode="horizontal" defaultSelectedKeys={[history.location.pathname]}>
+      <Menu.Item key="/">
         <Link to="/">Home</Link>
       </Menu.Item>
-      <Menu.Item key="dolar">
+      <Menu.Item key="/dolar">
         <Link to="/dolar">Dolar</Link>
       </Menu.Item>
-      <Menu.Item key="weather">
+      <Menu.Item key="/weather">
         <Link to="/weather">Clima</Link>
       </Menu.Item>
-      {user.role === "admin" ? (
-        <Menu.Item key="admin">
+      {user.logged && user.role === "admin" ? (
+        <Menu.Item key="/admin">
           <Link to="/admin">Admin usuarios</Link>
         </Menu.Item>
       ) : null}

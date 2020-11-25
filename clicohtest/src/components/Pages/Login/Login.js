@@ -1,15 +1,17 @@
 //react
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { contextSelector, login } from "../../../reducers/contextSlice";
 //antd
 import { Form, Input, Button } from "antd";
-import { Link } from "react-router-dom";
-//
+import { useHistory, Redirect } from "react-router-dom";
+//scss
 import "./Login.scss";
 
 const Login = (props) => {
+  const userContext = useSelector(contextSelector).user;
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const formIntialValues = {
     name: "",
@@ -19,19 +21,11 @@ const Login = (props) => {
   const [user, setUser] = useState(formIntialValues);
 
   const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 8,
-    },
+    labelCol: { span: 4 },
+    wrapperCol: { span: 20 },
   };
-
   const tailLayout = {
-    wrapperCol: {
-      offset: 8,
-      span: 8,
-    },
+    wrapperCol: { offset: 8, span: 16 },
   };
 
   const onLogin = () => {
@@ -46,6 +40,8 @@ const Login = (props) => {
       [propertyName]: event.target.value,
     });
   };
+
+  if (userContext.logged) return <Redirect to="/admin" />;
 
   return (
     <Form

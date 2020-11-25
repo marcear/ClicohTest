@@ -5,8 +5,8 @@ import Main from "./components/Main/Main";
 //react-router
 import { BrowserRouter as Router } from "react-router-dom";
 //redux
-import { useSelector, useDispatch } from "react-redux";
-import { contextSelector, setUser } from "./reducers/contextSlice";
+import { useDispatch } from "react-redux";
+import { setUser } from "./reducers/contextSlice";
 
 function App() {
   const dispatch = useDispatch();
